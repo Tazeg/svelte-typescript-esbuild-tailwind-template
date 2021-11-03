@@ -6,7 +6,7 @@ const postCssPlugin = require('esbuild-plugin-postcss2').default
 const tailwindcss = require('tailwindcss')
 const liveServer = require('live-server') // dev server
 
-function showUsage () {
+function showUsage() {
   console.log('USAGE')
   console.log('node esbuild.js watch') // build and serve dev files
   console.log('node esbuild.js dev') // build dev files
@@ -23,13 +23,13 @@ if (!['dev', 'watch', 'prod'].includes(process.argv[2])) {
 }
 
 // production mode, or not
-const production = (process.argv[2] === 'prod')
+const production = process.argv[2] === 'prod'
 
 // esbuild watch in dev mode to rebuild out files
 let watch = false
 if (process.argv[2] === 'watch') {
   watch = {
-    onRebuild (error) {
+    onRebuild(error) {
       if (error) console.error('esbuild: Watch build failed:', error.getMessage())
       else console.log('esbuild: Watch build succeeded')
     }
@@ -53,10 +53,10 @@ const options = {
   minify: production,
   sourcemap: false,
   outfile: './public/build/bundle.js', // and bundle.css
-  pure: production ? [ 'console.log', 'console.time', 'console.timeEnd' ] : [],
+  pure: production ? ['console.log', 'console.time', 'console.timeEnd'] : [],
   legalComments: 'none',
   plugins: [
-    sveltePlugin({preprocess: sveltePreprocess()}),
+    sveltePlugin({ preprocess: sveltePreprocess() }),
     postCssPlugin({
       plugins: [autoprefixer, tailwindcss]
     })
