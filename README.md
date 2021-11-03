@@ -14,7 +14,7 @@ yarn install # or npm
 
 ```sh
 yarn run dev # start dev server
-yarn run lint # check your code
+yarn run lint # check and prettify your code
 ```
 
 ## Build for production
