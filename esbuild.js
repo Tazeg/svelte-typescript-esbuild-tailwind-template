@@ -1,9 +1,6 @@
 const esbuild = require('esbuild')
 const sveltePreprocess = require('svelte-preprocess')
 const sveltePlugin = require('esbuild-svelte') // esbuild plugin svelte
-const autoprefixer = require('autoprefixer')
-const postCssPlugin = require('esbuild-plugin-postcss2').default
-const tailwindcss = require('tailwindcss')
 const liveServer = require('live-server') // dev server
 
 function showUsage() {
@@ -55,12 +52,7 @@ const options = {
   outfile: './public/build/bundle.js', // and bundle.css
   pure: production ? ['console.log', 'console.time', 'console.timeEnd'] : [],
   legalComments: 'none',
-  plugins: [
-    sveltePlugin({ preprocess: sveltePreprocess() }),
-    postCssPlugin({
-      plugins: [autoprefixer, tailwindcss]
-    })
-  ]
+  plugins: [sveltePlugin({ preprocess: sveltePreprocess() })]
 }
 
 // esbuild dev + prod
